@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X 媒体下载器</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="hd">
+    <img class="brand" src="icon32.png" alt="" width="30" height="30" />
+    <div class="hd-txt">
+      <div class="title">媒体下载</div>
+      <div class="sub" id="sub">正在扫描当前页面…</div>
+    </div>
+    <button id="rescan" class="ghost" title="重新扫描" aria-label="重新扫描">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 11a8 8 0 1 0-2.3 6.1" />
+        <path d="M20 4.5V11h-6.4" />
+      </svg>
+    </button>
+  </header>
+
+  <section class="segs" role="radiogroup" aria-label="默认清晰度">
+    <label class="seg">
+      <input type="radio" name="q" value="best" checked />
+      <span>最高清</span>
+    </label>
+    <label class="seg">
+      <input type="radio" name="q" value="hd" />
+      <span>≥720p</span>
+    </label>
+    <label class="seg">
+      <input type="radio" name="q" value="small" />
+      <span>最小体积</span>
+    </label>
+  </section>
+
+  <main id="list" class="list"></main>
+
+  <footer class="ft">
+    <button id="all" class="primary" disabled>全部下载</button>
+    <div class="hint">保存到下载目录 <b>X视频/</b>，原样保存不转码</div>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

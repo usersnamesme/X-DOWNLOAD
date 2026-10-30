@@ -1,0 +1,23 @@
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 打包产物
+*.zip
+*.crx
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 生成的商店素材（可重新生成）
+store-assets/

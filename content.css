@@ -1,0 +1,246 @@
+/* X 媒体下载器 — 页面内 UI
+   角标用 absolute 挂进媒体容器，随页面原生滚动，不卡顿。
+   设计 token 对齐 X（Lights out / Light）。 */
+
+:root {
+  --xmd-bg: rgba(0, 0, 0, 0.78);
+  --xmd-fg: #ffffff;
+  --xmd-line: rgba(255, 255, 255, 0.16);
+  --xmd-panel-bg: #000000;
+  --xmd-panel-line: #2f3336;
+  --xmd-txt: #e7e9ea;
+  --xmd-dim: #71767b;
+  --xmd-hover: rgba(255, 255, 255, 0.04);
+  --xmd-blue: #1d9bf0;
+  --xmd-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Chirp", Roboto,
+    "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --xmd-bg: rgba(255, 255, 255, 0.92);
+    --xmd-fg: #0f1419;
+    --xmd-line: rgba(0, 0, 0, 0.12);
+    --xmd-panel-bg: #ffffff;
+    --xmd-panel-line: #cfd9de;
+    --xmd-txt: #0f1419;
+    --xmd-dim: #536471;
+    --xmd-hover: rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ---------------- 媒体角标 ---------------- */
+
+.xmd-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2147483600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 30px;
+  padding: 0 8px;
+  margin: 0;
+  border: 1px solid var(--xmd-line);
+  border-radius: 9999px;
+  background: var(--xmd-bg);
+  color: var(--xmd-fg);
+  font: 600 12.5px/1 var(--xmd-font);
+  cursor: pointer;
+  opacity: 0.78;
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  transition: opacity 0.16s ease, background 0.16s ease, border-color 0.16s ease,
+    gap 0.16s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  /* 让浏览器知道它会变，减少滚动时的重绘抖动 */
+  will-change: opacity;
+}
+
+.xmd-label:hover,
+.xmd-label:focus-visible {
+  opacity: 1;
+  background: var(--xmd-blue);
+  border-color: transparent;
+  color: #fff;
+  outline: none;
+  gap: 5px;
+}
+
+.xmd-label-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.xmd-label-txt {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.18s ease, opacity 0.14s ease;
+}
+
+.xmd-label:hover .xmd-label-txt,
+.xmd-label:focus-visible .xmd-label-txt {
+  max-width: 56px;
+  opacity: 1;
+}
+
+.xmd-label.busy .xmd-label-ico {
+  animation: xmd-spin 0.8s linear infinite;
+}
+
+@keyframes xmd-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------------- 清晰度面板 ---------------- */
+
+.xmd-panel {
+  position: fixed;
+  z-index: 2147483601;
+  width: 280px;
+  padding: 6px;
+  border-radius: 16px;
+  background: var(--xmd-panel-bg);
+  border: 1px solid var(--xmd-panel-line);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.06),
+    0 12px 40px rgba(0, 0, 0, 0.55);
+  color: var(--xmd-txt);
+  font: 400 13px/1.4 var(--xmd-font);
+  overflow: hidden;
+  animation: xmd-pop 0.14s ease-out;
+}
+
+
+
+@keyframes xmd-pop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.xmd-panel .xmd-head {
+  padding: 10px 12px 8px;
+}
+
+.xmd-panel .xmd-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.xmd-panel .xmd-sub {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--xmd-dim);
+}
+
+.xmd-panel .xmd-quote {
+  margin-top: 8px;
+  padding-left: 10px;
+  border-left: 2px solid var(--xmd-panel-line);
+  font-size: 12px;
+  color: var(--xmd-dim);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.xmd-panel .xmd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.xmd-panel .xmd-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.xmd-panel .xmd-row:hover {
+  background: var(--xmd-hover);
+}
+
+.xmd-panel .xmd-row.busy {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.xmd-panel .xmd-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.xmd-panel .xmd-res {
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.xmd-panel .xmd-meta {
+  font-size: 12px;
+  color: var(--xmd-dim);
+}
+
+.xmd-panel .xmd-badge {
+  flex: 0 0 auto;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: rgba(29, 155, 240, 0.14);
+  color: var(--xmd-blue);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.xmd-panel .xmd-badge.top {
+  background: var(--xmd-blue);
+  color: #fff;
+}
+
+.xmd-panel .xmd-row.done .xmd-badge {
+  background: rgba(0, 186, 124, 0.15);
+  color: #00ba7c;
+}
+
+/* ---------------- Toast ---------------- */
+
+#__xmd_toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translate(-50%, 12px);
+  z-index: 2147483602;
+  max-width: 80vw;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: var(--xmd-blue);
+  color: #fff;
+  font: 700 13px/1.4 var(--xmd-font);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+#__xmd_toast.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
