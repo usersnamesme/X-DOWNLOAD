@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>X 媒体下载器 — 一键保存 X 上的视频与原图</title>
+<meta name="description" content="浏览器扩展：视频可选全部清晰度，图片直出原图，不二次转码。开源免费，支持 Edge / Chrome 桌面版。" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="X 媒体下载器" />
+<meta property="og:title" content="X 媒体下载器 — 一键保存 X 上的视频与原图" />
+<meta property="og:description" content="视频可选全部清晰度，图片直出原图，不二次转码。开源免费，支持 Edge / Chrome。" />
+<meta property="og:url" content="https://usersnamesme.github.io/X-DOWNLOAD/" />
+<meta property="og:image" content="https://usersnamesme.github.io/X-DOWNLOAD/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter / X 卡片 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@NgshingHow" />
+<meta name="twitter:creator" content="@NgshingHow" />
+<meta name="twitter:title" content="X 媒体下载器 — 一键保存 X 上的视频与原图" />
+<meta name="twitter:description" content="视频可选全部清晰度，图片直出原图，不二次转码。开源免费，支持 Edge / Chrome。" />
+<meta name="twitter:image" content="https://usersnamesme.github.io/X-DOWNLOAD/og.png" />
+
+<link rel="icon" href="icon.png" />
+<style>
+  :root { --blue:#1d9bf0; --txt:#e7e9ea; --dim:#71767b; --line:#2f3336; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #000; color: var(--txt);
+    font: 400 16px/1.6 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+    background-image: radial-gradient(900px 500px at 70% 10%, rgba(29,120,200,.18), transparent 70%);
+  }
+  .wrap { max-width: 860px; width: 100%; }
+  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .brand img { width: 56px; height: 56px; border-radius: 14px; }
+  h1 { margin: 0; font-size: clamp(28px, 5vw, 44px); line-height: 1.25; letter-spacing: -0.02em; }
+  h1 span { color: var(--blue); }
+  .lead { color: var(--dim); font-size: clamp(15px, 2vw, 18px); margin: 18px 0 34px; max-width: 640px; }
+  .feats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-bottom: 38px; }
+  .feat { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: #0b0c0e; }
+  .feat b { display: block; color: var(--blue); font-size: 22px; margin-bottom: 4px; }
+  .feat span { color: var(--dim); font-size: 14px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-block; padding: 13px 26px; border-radius: 999px;
+    background: #eff3f4; color: #0f1419; font-weight: 700; text-decoration: none;
+    transition: opacity .15s;
+  }
+  .btn:hover { opacity: .88; }
+  .btn.ghost { background: transparent; color: var(--txt); border: 1px solid var(--line); }
+  .btn.ghost:hover { background: #16181c; }
+  .steps { margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line); color: var(--dim); font-size: 14px; }
+  .steps ol { margin: 12px 0 0; padding-left: 20px; }
+  .steps li { margin-bottom: 6px; }
+  .steps code { background: #16181c; padding: 2px 6px; border-radius: 5px; font-size: 13px; color: #cfd9de; }
+  footer { margin-top: 44px; color: #536471; font-size: 12.5px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <img src="icon.png" alt="" />
+      <div>
+        <div style="font-weight:800;font-size:18px">X 媒体下载器</div>
+        <div style="color:var(--dim);font-size:13px">开源浏览器扩展</div>
+      </div>
+    </div>
+
+    <h1>给 X 加一个<span>下载按钮</span></h1>
+    <p class="lead">
+      视频右上角多出一个小角标，点开能选 X 服务器上的全部清晰度；
+      图片直接存原图。全程不经过编码器，下载到的就是服务器上那份文件。
+    </p>
+
+    <div class="feats">
+      <div class="feat"><b>720p</b><span>列出全部档位与码率，任选一档</span></div>
+      <div class="feat"><b>原图</b><span>缩略图地址改写为 name=orig</span></div>
+      <div class="feat"><b>0 延迟</b><span>角标随页面原生滚动，不卡顿</span></div>
+    </div>
+
+    <div class="cta">
+      <a class="btn" href="https://github.com/usersnamesme/X-DOWNLOAD/releases/latest">下载安装包</a>
+      <a class="btn ghost" href="https://github.com/usersnamesme/X-DOWNLOAD">查看源码</a>
+    </div>
+
+    <div class="steps">
+      安装只需四步：
+      <ol>
+        <li>下载 zip 并解压，进到能看到 <code>manifest.json</code> 的那一层</li>
+        <li>浏览器打开 <code>edge://extensions/</code>，开启「开发人员模式」</li>
+        <li>点「加载解压缩的扩展」，选择该文件夹</li>
+        <li>刷新 <code>x.com</code>，角标就会出现</li>
+      </ol>
+    </div>
+
+    <footer>仅支持桌面版 Edge / Chrome · MIT License · 不收集任何数据</footer>
+  </div>
+</body>
+</html>
